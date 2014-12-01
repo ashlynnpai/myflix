@@ -1,0 +1,5 @@
+.category-row
+  %h1= @category.name
+  - @category.videos.each do |video|
+    .each-video
+    = link_to image_tag(video.small, width: '130'), video_path(video)
