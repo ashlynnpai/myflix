@@ -5,10 +5,14 @@
     %li= link_to "Videos"
     %li= link_to "My Queue"
     %li= link_to "People"
-  %form.col-md-5.navbar-form(action="")
-    .form-group
-      %input.form-control(type="text" placeholder="Search for videos here")
-    %button.btn.btn-default(type="submit") Search
+  -#%form.col-md-5.navbar-form(action="")
+  =#.form-group
+  .col-md-5.for-search
+    = form_tag videos_search_path, :method => 'get' do 
+      = text_field_tag :search_term
+      = submit_tag "Search", :class => 'btn'
+      -#%input.form-control(type="text" placeholder="Search for videos here")
+      -#%button.btn.btn-default(type="submit") Search
   #user_links.pull-right
     %ul
       %li.dropdown
