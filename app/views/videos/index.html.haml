@@ -1,9 +1,11 @@
 - @categories.each do |category|
   .category-row
     %h1= link_to category.name, category_path(category)
-    - category.videos.each do |video|
+    - category.recent_videos.each do |video|
       .each-video
-      = link_to image_tag(video.small, width: '140'), video_path(video)
+        = link_to image_tag(video.small, width: '140'), video_path(video)
+  
+      
 
       
 
