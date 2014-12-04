@@ -9,6 +9,10 @@ module Myflix
     config.encoding = "utf-8"
     config.filter_parameters += [:password]
     config.active_support.escape_html_entities_in_json = true
+    
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
+  html_tag
+}
 
     config.assets.enabled = true
     config.generators do |g|

@@ -1,0 +1,16 @@
+
+%section.register.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      .form-horizontal
+        = bootstrap_form_for @user do |f|
+          %header
+            %h1 Register
+          %fieldset
+            .col-sm-6
+              = f.text_field :email, label: "Email"
+              = f.password_field :password, label: "Password"
+              = f.text_field :name , label: "Full Name"
+          %fieldset.actions.control-group
+            .controls
+              = f.submit(@user.new_record? ? 'Register' : 'Update Profile', class: 'btn btn-success') 
