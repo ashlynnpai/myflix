@@ -5,16 +5,18 @@
         %header
           %h1 Sign in
         %fieldset
-        = form_tag '/login' do
-          .form-group
-            .row
-              .col-sm-4
-                = label_tag :email 
-                = text_field_tag :email, params[:email] || '' 
-          .form-group
-            .row
-              .col-sm-4
-                = label_tag :password
-                = password_field_tag :password, params[:password] || ''
-        %fieldset.form-group.action
-          %input(type="submit" value="Sign in" class="btn btn-default")
+          = form_tag login_path do
+            .form-group
+              = label_tag :email, "Email Address" 
+              .row
+                .col-sm-4
+                  = text_field_tag :email, nil, class: 'form-control'
+            .form-group
+              = label_tag :password, "Password"
+              .row
+                .col-sm-4
+                  = password_field_tag :password, nil, class: 'form-control'
+              %fieldset.form-group.action
+                %input(type="submit" value="Sign in" class="btn btn-default")
+
+

@@ -1,10 +1,10 @@
 class SessionsController<ApplicationController
   def new
-    
+    redirect_to home_path if current_user
   end
   
   def create
-    user = User.where(username: params[:username]).first
+    user = User.where(email: params[:email]).first
     
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
