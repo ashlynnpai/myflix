@@ -10,9 +10,9 @@ describe VideosController do
     end      
     
     it "sets @reviews for authenticated users" do
-        session[:user_id] = Fabricate(:user).id
         review1 = Fabricate(:review, video: video)
         review2 = Fabricate(:review, video: video)
+        session[:user_id] = Fabricate(:user).id
         get :show, id: video.id
         assigns(:reviews).should =~ [review1, review2]
     end

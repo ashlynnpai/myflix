@@ -46,7 +46,7 @@ describe ReviewsController do
           
         it "sets @reviews" do
           review = Fabricate(:review, video: video)
-          post :create, review: {rating: 4}, video_id: video.id
+          post :create, review: {rating: 4, created_at: '2014-12-08 17:22:01'}, video_id: video.id
           expect(assigns(:reviews)).to match_array([review])
         end
       end
