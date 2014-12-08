@@ -9,7 +9,7 @@
       %li= link_to "Register", register_path
 
   .col-md-5.for-search
-    = form_tag videos_search_path, :method => 'get' do 
+    = form_tag search_videos_path, :method => 'get' do 
       = text_field_tag :search_term, nil, class: 'form-control'
       = submit_tag "Search", :class => 'btn'
   #user_links.pull-right
