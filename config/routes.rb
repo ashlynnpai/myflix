@@ -3,13 +3,7 @@ Myflix::Application.routes.draw do
   
   root to: 'pages#front'
   get '/home', to: 'videos#index'
-  
-#   get '/videos/search', to: 'videos#search'
-
-#   get '/videos/:id', to: 'videos#show', as: "video" do
-#     post '/reviews', to: 'reviews#create'
-#   end
-  
+    
   resources :videos, only: [:show] do
     collection do
       get :search, to: "videos#search"
@@ -21,6 +15,8 @@ Myflix::Application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
+  
+  get 'my_queue', to: 'queue_items#index'
   
   resources :users, only: [:show, :create, :edit, :update]
   

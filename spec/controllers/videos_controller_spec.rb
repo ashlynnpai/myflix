@@ -43,5 +43,13 @@ describe VideosController do
       expect(response).to redirect_to login_path
     end
   end
+  
+  describe 'GET queue' do
+    it "puts the video into the queue array" do
+      video1 = Fabricate(:video)
+      video2 = Fabricate(:video)
+      @queue = ""
+    end
+  end
 end
 
