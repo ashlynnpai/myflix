@@ -1,5 +1,5 @@
 Myflix::Application.routes.draw do
-  get 'ui(/:action)', controller: 'ui'
+ 
   
   root to: 'pages#front'
   get '/home', to: 'videos#index'
@@ -11,6 +11,7 @@ Myflix::Application.routes.draw do
     resources :reviews, only: [:create]
   end
   
+  get 'ui(/:action)', controller: 'ui'
   get '/register', to: 'users#new'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
@@ -22,5 +23,6 @@ Myflix::Application.routes.draw do
   
   resources :categories, only: [:new, :create, :show]
   resources :queue_items, only: [:create, :destroy]
+  post 'update_queue', to: 'queue_items#update_queue'
  
 end
