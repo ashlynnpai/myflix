@@ -123,15 +123,21 @@ describe QueueItemsController do
           expect(response).to redirect_to my_queue_path
         end
         
-        it "reorders the queue items" do 
-          post :update_queue, queue_items: [{id: queue_item2.id, position: 1}]
-          expect(user1.queue_items).to eq([queue_item2, queue_item1])
-        end
-   
         it "normalizes the position numbers" do      
           post :update_queue, queue_items: [{id: queue_item1.id, position: 3}, {id: queue_item2.id, position: 2}]
-          expect(user1.queue_items.map(&:position)).to eq([1, 2])
+          expect(user1.queue_items).to eq([queue_item2, queue_item1])
+          #expect(user1.queue_items.map(&:position)).to eq([2, 1])
         end
+    end
+    
+    it "reorders the queue items" do 
+      user1 = Fabricate(:user)
+      session[:user_id] = user1.id
+      video = Fabricate(:video)
+      queue_item1 = Fabricate(:queue_item, user: user1, position: 1, video: video) 
+      queue_item2 = Fabricate(:queue_item, user: user1, position: 2, video: video) 
+      post :update_queue, queue_items: [{id: queue_item2.id, position: 1}]
+      expect(user1.queue_items).to eq([queue_item2, queue_item1])
     end
     
     it "reorders the queue items with four items in the queue" do 

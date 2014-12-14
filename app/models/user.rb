@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :reviews
-  has_many :queue_items, -> { order(:position) }
+  has_many :queue_items, -> { order(position: :asc, updated_at: :desc) }
 
   
   validates :name, presence: true
