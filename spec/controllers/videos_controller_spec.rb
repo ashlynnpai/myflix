@@ -1,10 +1,11 @@
 require 'spec_helper' 
 
 describe VideosController do
+ 
   describe "GET show" do  
     video = Fabricate(:video)
     it "sets @video variable for authenticated users" do
-        session[:user_id] = Fabricate(:user).id
+        set_current_user
         get :show, id: video.id
         expect(assigns(:video)).to eq(video)
     end      
@@ -12,7 +13,7 @@ describe VideosController do
     it "sets @reviews for authenticated users" do
         review1 = Fabricate(:review, video: video)
         review2 = Fabricate(:review, video: video)
-        session[:user_id] = Fabricate(:user).id
+        set_current_user
         get :show, id: video.id
         assigns(:reviews).should =~ [review1, review2]
     end
@@ -24,7 +25,7 @@ describe VideosController do
     
     it "sets @review for authenticated users" do
         review1 = Fabricate(:review, video: video)
-        session[:user_id] = Fabricate(:user).id
+        set_current_user
         get :show, id: video.id
         assigns(:review).should be_new_record
     end   
@@ -33,7 +34,7 @@ describe VideosController do
   describe "GET search" do
     it "sets @results for authenticated users" do
       scooby = Fabricate(:video, title: "Scooby Doo")
-      session[:user_id] = Fabricate(:user).id
+      set_current_user
       get :search, search_term: 'oob'
       expect(assigns(:results)).to eq([scooby])
     end    

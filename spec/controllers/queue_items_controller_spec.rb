@@ -3,28 +3,27 @@ require 'spec_helper'
 describe QueueItemsController do
   describe "GET index" do
     it "sets @queue_items to the queue of logged in user" do
-      user1 = Fabricate(:user)
-      session[:user_id] = user1.id
-      queue_item1 = Fabricate(:queue_item, user: user1)
-      queue_item2 = Fabricate(:queue_item, user: user1)
+      set_current_user
+      queue_item1 = Fabricate(:queue_item, user: current_user)
+      queue_item2 = Fabricate(:queue_item, user: current_user)
       get :index
       expect(assigns(:queue_items)).to match_array([queue_item1, queue_item2])
     end
-    it "redirects to login for unauthenticated users" do
-      get :index
-      expect(response).to redirect_to login_path
+
+    it_behaves_like "requires sign in" do
+      let(:action) {get :index}
     end
   end
   
   describe "POST create" do
     it "redirects to my queue" do
-      session[:user_id] = Fabricate(:user).id
+      set_current_user
       video = Fabricate(:video)
       post :create, video_id: video.id
       expect(response).to redirect_to my_queue_path
     end
     it "creates a queue item" do
-      session[:user_id] = Fabricate(:user).id
+      set_current_user
       video = Fabricate(:video)
       post :create, video_id: video.id
       expect(QueueItem.count).to eq(1)
@@ -61,9 +60,9 @@ describe QueueItemsController do
       post :create, video_id: monk.id
       expect(user1.queue_items.count).to eq(1)
     end
-    it "redirects to sign in for unauthenticated users" do
-      post :create, video_id: 3
-      expect(response).to redirect_to login_path
+    
+    it_behaves_like "requires sign in" do
+      let(:action) { post :create, video_id: 3 }
     end
   end
   
@@ -100,14 +99,18 @@ describe QueueItemsController do
       delete :destroy, id: queue_item.id
       expect(QueueItem.count).to eq(1)     
     end
-    
-    it "redirects to login page for unauthenticated users" do
-        delete :destroy, id: 3
-        expect(response).to redirect_to login_path
-    end
+
+     it_behaves_like "requires sign in" do
+       let(:action) { delete :destroy, id: 3 }
+     end
   end
   
   describe "POST update_queue" do
+    
+    it_behaves_like "requires sign in" do
+      let(:action) { post :update_queue, queue_items: [{id: 2, position: 1}, {id: 3, position: 2}] }
+    end
+    
     context "with valid inputs" do
       
       let(:user1) { Fabricate(:user) }
@@ -126,7 +129,6 @@ describe QueueItemsController do
         it "normalizes the position numbers" do      
           post :update_queue, queue_items: [{id: queue_item1.id, position: 3}, {id: queue_item2.id, position: 2}]
           expect(user1.queue_items).to eq([queue_item2, queue_item1])
-          #expect(user1.queue_items.map(&:position)).to eq([2, 1])
         end
     end
     
@@ -177,14 +179,7 @@ describe QueueItemsController do
         expect(queue_item1.reload.position).to eq(1)
       end
     end
-    context "with unauthenticated users" do
-      it "redirects to the sign in path" do
-        queue_item1 = Fabricate(:queue_item, position: 1)
-        queue_item2 = Fabricate(:queue_item, position: 2)
-        post :update_queue, queue_items: [{id: queue_item1.id, position: 1}, {id: queue_item2.id, position: 2}]
-        expect(response).to redirect_to login_path
-      end
-    end
+        
     context "with queue items that do not belong to the current user" do
       it "does not change the queue items" do
         user1 = Fabricate(:user)
