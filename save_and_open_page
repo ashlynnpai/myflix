@@ -1,0 +1,15 @@
+
+[1mFrom:[0m /home/action/workspace/myflix/spec/features/interact_with_queue.rb @ line 9 :
+
+     [1;34m4[0m:   scenario [31m[1;31m"[0m[31madds and reorders videos[1;31m"[0m[31m[0m [32mdo[0m
+     [1;34m5[0m:     comedies = Fabricate([33m:category[0m)
+     [1;34m6[0m:     video1 = Fabricate([33m:video[0m, [35mtitle[0m: [31m[1;31m"[0m[31mMonk[1;31m"[0m[31m[0m, [35mcategory[0m: comedies)
+     [1;34m7[0m:     video2 = Fabricate([33m:video[0m, [35mtitle[0m: [31m[1;31m"[0m[31mSouth Park[1;31m"[0m[31m[0m, [35mcategory[0m: comedies)
+     [1;34m8[0m:     sign_in
+ =>  [1;34m9[0m:     require [31m[1;31m'[0m[31mpry[1;31m'[0m[31m[0m; binding.pry
+    [1;34m10[0m:     find([31m[1;31m"[0m[31ma[href='/video/#{video1.id}[0m[31m'][1;31m"[0m[31m[0m).click
+    [1;34m11[0m:     page.should have_content(video1.title)
+    [1;34m12[0m:   [32mend[0m
+    [1;34m13[0m:     
+    [1;34m14[0m: 0;34#       describe "POST video to queue" do[0m
+

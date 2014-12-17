@@ -11,8 +11,7 @@ gem 'jquery-rails'
 gem 'pg'
 gem 'bcrypt-ruby'
 gem 'bootstrap_form'
-gem 'fabrication'
-gem 'faker'
+
 
 group :development do
   gem 'thin'
@@ -24,11 +23,15 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'rspec-rails', '2.99'
+  gem 'fabrication'
+  gem 'faker'
 end
 
 group :test do
   gem 'database_cleaner', '1.2.0'
   gem 'shoulda-matchers'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 group :production do
