@@ -31,4 +31,12 @@ describe UsersController do
       end
     end
   end
+  
+   describe "GET show" do
+    it "sets @user" do
+      user = Fabricate(:user)
+      get :show, id: user.id
+      expect(response).to be_success
+    end
+  end
 end
