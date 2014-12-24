@@ -17,7 +17,7 @@ describe User do
     it "returns false when the user has not queued the video" do
       user = Fabricate(:user)
       video = Fabricate(:video)
-      user.queued_video?(video).should be_false
+      user.queued_video?(video).should be_falsey
     end
   end
 end
