@@ -7,7 +7,8 @@
       %li= link_to "My Queue", my_queue_path
       %li= link_to "People", people_path
   - else
-    %li= link_to "Register", register_path
+    %ul.col-md-4.clearfix
+      %li= link_to "Register", register_path
 
   .col-md-5.for-search
     = form_tag search_videos_path, :method => 'get' do 
