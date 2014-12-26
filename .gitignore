@@ -16,3 +16,6 @@
 
 database.yml
 notes.txt
+
+# Ignore application configuration
+/config/application.yml
