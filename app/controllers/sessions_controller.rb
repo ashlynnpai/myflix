@@ -9,6 +9,7 @@ class SessionsController<ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:notice] = "You are now logged in."
+      AppMailer.welcome_mail(@user).deliver
       redirect_to home_path
     else
       flash[:error] = "There's something wrong with your username or password."
