@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   
   has_secure_password validations: false
   
-  #before_create :generate_token  #the call to generate_token was moved to forgot_passwords_controller create
+  #before_create :generate_token  #the call to generate_token was moved to forgot_passwords_controller#create
   
   def normalize_queue_item_positions
     queue_items.each_with_index do |queue_item, index|

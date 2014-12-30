@@ -13,8 +13,7 @@ describe PasswordResetsController do
       user = Fabricate(:user)
       user.update_column(:token, '123')
       get :show, id: '123'
-      expect(assigns(:token)).to eq('123')
-      
+      expect(assigns(:token)).to eq('123')      
     end
     
     it "redirects to the expired token page if token is not valid" do
@@ -30,8 +29,7 @@ describe PasswordResetsController do
         user.update_column(:token, '123')
         post :create, token: '123', password: 'newpass'
         expect(user.reload.authenticate('newpass')).to be_truthy
-      end
-      
+      end     
       it "redirects to the sign in page" do
         user = Fabricate(:user, password: 'oldpass')
         user.update_column(:token, '123')
@@ -44,12 +42,19 @@ describe PasswordResetsController do
         post :create, token: '123', password: 'newpass'
         expect(flash[:success]).to be_present
       end
-      it "regenerates the user token" do
+      it "destroys the token" do
         user = Fabricate(:user, password: 'oldpass')
         user.update_column(:token, '123')
         post :create, token: '123', password: 'newpass'
-        expect(user.reload.token).not_to eq('123')    
+        expect(user.reload.token).not_to be_present
       end
+#  replaced regenerating the token with destroying it
+#       it "regenerates the user token" do
+#         user = Fabricate(:user, password: 'oldpass')
+#         user.update_column(:token, '123')
+#         post :create, token: '123', password: 'newpass'
+#         expect(user.reload.token).not_to eq('123')    
+#       end
     end
     context "with invalid token" do
       it "redirects to the expired token path" do
