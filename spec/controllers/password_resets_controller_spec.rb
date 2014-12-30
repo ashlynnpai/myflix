@@ -29,7 +29,7 @@ describe PasswordResetsController do
         user = Fabricate(:user, password: 'oldpass')
         user.update_column(:token, '123')
         post :create, token: '123', password: 'newpass'
-        expect(user.reload.authenticate('newpass')).to be_true
+        expect(user.reload.authenticate('newpass')).to be_truthy
       end
       
       it "redirects to the sign in page" do

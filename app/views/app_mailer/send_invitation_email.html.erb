@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>You were invited by #{@invitation.inviter.name} to join MyFlix.</p>
+    <p>
+      @invitation.message
+    </p>
+    <%= link_to "Accept Invitation", register_with_token_url(@invitation.token) %>
+    
+  </body>
+</html>

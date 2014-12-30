@@ -11,6 +11,7 @@
               = f.text_field :email, label: "Email"
               = f.password_field :password, label: "Password"
               = f.text_field :name , label: "Full Name"
+              = hidden_field_tag :invitation_token, @invitation_token
           %fieldset.actions.control-group
             .controls
               = f.submit(@user.new_record? ? 'Register' : 'Update Profile', class: 'btn btn-success') 

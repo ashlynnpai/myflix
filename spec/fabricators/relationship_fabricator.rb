@@ -1,3 +1,2 @@
 Fabricator(:relationship) do
-  
 end
