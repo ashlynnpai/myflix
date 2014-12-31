@@ -48,14 +48,30 @@ describe PasswordResetsController do
         post :create, token: '123', password: 'newpass'
         expect(user.reload.token).not_to be_present
       end
-#  replaced regenerating the token with destroying it
-#       it "regenerates the user token" do
-#         user = Fabricate(:user, password: 'oldpass')
-#         user.update_column(:token, '123')
-#         post :create, token: '123', password: 'newpass'
-#         expect(user.reload.token).not_to eq('123')    
-#       end
     end
+
+    # if need to test password validations:    
+#     context "with invalid input" do
+#        it "does not save the new password" do
+#           user = Fabricate(:user, password: 'oldpass')
+#           user.update_column(:token, '123')
+#           post :create, token: '123', password: 'new'
+#           expect(user.reload.authenticate('new')).to be_falsey
+#        end
+#        it "does not give a flash success message of the password is not valid" do
+#           user = Fabricate(:user, password: 'oldpass')
+#           user.update_column(:token, '123')
+#           post :create, token: '123', password: 'new'
+#           expect(flash[:success]).not_to be_present    
+#         end
+#       it "redirects to the password reset form" do
+#           user = Fabricate(:user, password: 'oldpass')
+#           user.update_column(:token, '123')
+#           post :create, token: '123', password: 'new'
+#           expect(response).to redirect_to password_reset_url(user.token)
+#       end
+#     end
+    
     context "with invalid token" do
       it "redirects to the expired token path" do
         post :create, token: '123', password: 'somepass'
