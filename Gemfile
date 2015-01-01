@@ -14,6 +14,7 @@ gem 'bootstrap_form'
 gem 'figaro'
 gem 'redis'
 gem 'sidekiq'
+gem 'unicorn'
 
 
 group :development do
