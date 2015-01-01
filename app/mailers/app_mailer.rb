@@ -1,5 +1,5 @@
 class AppMailer < ActionMailer::Base
-  default from: "awebcafe@gmail.com"
+  default from: "postmaster@sandbox6f4410d5242c40969973458f66ef8502.mailgun.org"
 
   def welcome_mail(user)
     @user = user
