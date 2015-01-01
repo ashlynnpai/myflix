@@ -1,5 +1,5 @@
 class AppMailer < ActionMailer::Base
-  default from: "postmaster@sandbox6f4410d5242c40969973458f66ef8502.mailgun.org"
+  default from: "flixmaster@myflix.com"
 
   def welcome_mail(user)
     @user = user
