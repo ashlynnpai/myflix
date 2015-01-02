@@ -15,6 +15,7 @@ gem 'figaro'
 gem 'redis'
 gem 'sidekiq'
 gem 'unicorn'
+gem 'paratrooper'
 
 
 group :development do
