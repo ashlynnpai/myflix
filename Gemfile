@@ -16,6 +16,7 @@ gem 'redis'
 gem 'sidekiq'
 gem 'unicorn'
 gem 'paratrooper'
+gem 'sentry-raven'
 
 
 group :development do

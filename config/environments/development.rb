@@ -7,6 +7,16 @@ Myflix::Application.configure do
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
+  
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  user_name: ENV['MAILTRAP_LOGIN'],
+  password: ENV['MAILTRAP_PASSWORD'],
+  address: 'mailtrap.io',
+  port: '2525',
+  domain: 'mailtrap.io',
+  authentication: 'plain'
+}
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
