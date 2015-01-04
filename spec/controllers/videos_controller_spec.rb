@@ -52,5 +52,6 @@ describe VideosController do
       @queue = ""
     end
   end
+
 end
 
