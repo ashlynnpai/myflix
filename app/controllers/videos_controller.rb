@@ -17,10 +17,6 @@ class VideosController < ApplicationController
 
   private
   
-   def post_params
-     params.require(:video).permit(:title, :description, :small, :large)
-  end
-  
   def set_video
     @video = Video.find(params[:id])
   end
