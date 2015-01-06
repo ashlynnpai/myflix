@@ -8,12 +8,18 @@ class UsersController < ApplicationController
      @user = User.new(user_params)
     
     if @user.save
-      if params[:invitation_token].present?      
-        invitation = Invitation.where(token: params[:invitation_token]).first    
-        @user.follow(invitation.inviter)      
-        invitation.inviter.follow(@user)
-        invitation.update_column(:token, nil)
-      end
+        if params[:invitation_token].present?      
+          invitation = Invitation.where(token: params[:invitation_token]).first    
+          @user.follow(invitation.inviter)      
+          invitation.inviter.follow(@user)
+          invitation.update_column(:token, nil)
+        end
+      Stripe.api_key = ENV['STRIPE_SECRET_KEY']
+      Stripe::Charge.create(
+        :amount => 999,
+        :currency => "usd",
+        :card => params[:stripeToken],
+        :description => "Charge for MyFlix for #{@user.email}")
       AppMailer.welcome_mail(@user).deliver
       redirect_to login_path
     else
