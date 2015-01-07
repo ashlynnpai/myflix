@@ -29,7 +29,6 @@ describe UsersController do
         message = ActionMailer::Base.deliveries.last
         message.body.should include('MyFlix has one of the largest selections of videos around.')
       end    
-  
     end
       
     context "with invalid input" do
