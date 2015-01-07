@@ -1,6 +1,4 @@
-class Admin::VideosController < ApplicationController
-  before_filter :require_user
-  before_filter :require_admin
+class Admin::VideosController < AdminsController
   
   def new
     @video = Video.new
@@ -14,12 +12,6 @@ class Admin::VideosController < ApplicationController
     else
       flash[:error] = "The video was not added."
       render :new
-    end
-  end
-  
-  def require_admin
-    if !current_user.admin?
-      redirect_to home_path
     end
   end
   
