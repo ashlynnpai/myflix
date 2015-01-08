@@ -2,7 +2,7 @@ require 'capybara/email/rspec'
 require 'spec_helper'
 
 feature 'Invite a Friend' do
-  scenario 'invite a friend' do
+  scenario 'invite a friend', { js: true, vcr: true } do
     user = Fabricate(:user)
     sign_in(user)
     
@@ -39,7 +39,11 @@ feature 'Invite a Friend' do
     current_email.click_link 'Accept Invitation'
     fill_in "Password", :with => 'password1'
     fill_in "Full Name", :with => 'Happy Hippo'
-    click_button "Register"
+    fill_in "Credit Card Number", :with => "4242424242424242"
+    fill_in "Security Code", :with => "123"
+    select "7 - July", from: "date_month"
+    select "2017", from: "date_year"
+    click_button "Sign Up"
   end
 end
 

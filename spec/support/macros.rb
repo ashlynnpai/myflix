@@ -27,15 +27,3 @@ def sign_out
   visit logout_path
 end
 
-def get_stripe_token_id
-  Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
-  @token ||= Stripe::Token.create(
-    :card => {
-    :number => "4242424242424242",
-    :exp_month => 11,
-    :exp_year => 2015,
-    :cvc => "123"
-    }
-  )
-  @token.id
-end

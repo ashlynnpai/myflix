@@ -15,5 +15,5 @@ Myflix::Application.configure do
 
   config.action_mailer.delivery_method = :test
   config.active_support.deprecation = :stderr
-  config.action_mailer.default_url_options = { host: "www.example.com" }
+  config.action_mailer.default_url_options = { host: "http://tealeaf1-154988.use1.nitrousbox.com:52662" }
 end

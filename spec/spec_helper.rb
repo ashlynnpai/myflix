@@ -6,7 +6,8 @@ require 'capybara/rspec'
 require 'sidekiq/testing'
 Sidekiq::Testing.inline!
 
-
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -19,11 +20,37 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
+Capybara.server_port = 52662
+
+Capybara.register_driver :poltergeist do |app|
+  options = {
+    :js_errors => false,
+    :timeout => 120,
+    :debug => false,
+    :phantomjs_options => ['--load-images=no', '--disk-cache=false', '--ignore-ssl-errors=yes'],
+    :inspector => true
+  }
+  Capybara::Poltergeist::Driver.new(app, options)
+end
+ 
+Capybara.default_wait_time = 30
+
+class ActiveRecord::Base
+  mattr_accessor :shared_connection
+  @@shared_connection = nil
+   
+  def self.connection
+    @@shared_connection || retrieve_connection
+  end
+end
+ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
+
 
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/cassettes'
   c.hook_into :webmock
   c.configure_rspec_metadata!
+  c.ignore_hosts 'http://tealeaf1-154988.use1.nitrousbox.com/'
 end
 
 RSpec.configure do |config|
@@ -41,7 +68,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
@@ -55,6 +82,26 @@ RSpec.configure do |config|
   config.order = "random"
   
   config.treat_symbols_as_metadata_keys_with_true_values = true
+  
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each, :js => true) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and

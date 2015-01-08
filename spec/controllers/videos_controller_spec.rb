@@ -1,16 +1,16 @@
 require 'spec_helper' 
 
 describe VideosController do
- 
   describe "GET show" do  
-    video = Fabricate(:video)
     it "sets @video variable for authenticated users" do
+        video = Fabricate(:video)
         set_current_user
         get :show, id: video.id
         expect(assigns(:video)).to eq(video)
     end      
     
     it "sets @reviews for authenticated users" do
+        video = Fabricate(:video)
         review1 = Fabricate(:review, video: video)
         review2 = Fabricate(:review, video: video)
         set_current_user
@@ -19,11 +19,13 @@ describe VideosController do
     end
     
     it "redirects the unauthenticated user to sign in" do
+        video = Fabricate(:video)
         get :show, id: video.id
         expect(response).to redirect_to login_path
     end
     
     it "sets @review for authenticated users" do
+        video = Fabricate(:video)
         review1 = Fabricate(:review, video: video)
         set_current_user
         get :show, id: video.id
@@ -52,6 +54,5 @@ describe VideosController do
       @queue = ""
     end
   end
-
 end
 

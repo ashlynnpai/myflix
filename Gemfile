@@ -21,6 +21,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
 gem 'stripe'
+gem 'poltergeist'
 
 group :development do
   gem 'thin'
@@ -39,11 +40,12 @@ group :development, :test do
 end
 
 group :test do
-  gem 'database_cleaner', '1.2.0'
+  gem 'database_cleaner'
   gem 'shoulda-matchers'
   gem 'capybara'
   gem 'capybara-email'
   gem 'launchy'
+  gem 'selenium-webdriver'
 end
 
 group :production, :staging do
