@@ -16,21 +16,21 @@
               = f.text_field :name , label: "Full Name"
               = hidden_field_tag :invitation_token, @invitation_token
           %fieldset.credit_card
-            %span.payment-errors
-              .form-group
-                %label.control-label.col-sm-2(for="credit-card-number") Credit Card Number
-                .col-sm-6
-                  %input.form-control#credit-card-number(type="text" data-stripe="number")
-              .form-group
-                %label.control-label.col-sm-2(for="security-code") Security Code
-                .col-sm-6
-                  %input.form-control#security-code(type="text" data-stripe="cvc")
-              .form-group
-                %label.control-label.col-sm-2 Expiration
-                .col-sm-3
-                  = select_month(Date.today, {add_month_numbers: true},  class: 'form-control', data: {stripe: "exp-month"})
-                .col-sm-2
-                  = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, class: 'form-control', data: {stripe: "exp-year"})
+            .payment-errors
+            .form-group
+              %label.control-label.col-sm-2(for="credit-card-number") Credit Card Number
+              .col-sm-6
+                %input.form-control#credit-card-number(type="text" data-stripe="number")
+            .form-group
+              %label.control-label.col-sm-2(for="security-code") Security Code
+              .col-sm-6
+                %input.form-control#security-code(type="text" data-stripe="cvc")
+            .form-group
+              %label.control-label.col-sm-2 Expiration
+              .col-sm-3
+                = select_month(Date.today, {add_month_numbers: true},  class: 'form-control', data: {stripe: "exp-month"})
+              .col-sm-2
+                = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, class: 'form-control', data: {stripe: "exp-year"})
 
               -#<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key=#{ENV['STRIPE_PUBLISHABLE_KEY']} data-name="Pay for MyFlix Now" data-description="$9.99 to sign up for MyFlix video streaming" data-amount="999"></script>            
             %fieldset.actions.control-group.col-sm-offset-2
