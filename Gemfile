@@ -22,6 +22,7 @@ gem 'mini_magick'
 gem 'fog'
 gem 'stripe'
 gem 'poltergeist'
+gem 'draper'
 
 group :development do
   gem 'thin'

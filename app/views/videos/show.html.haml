@@ -6,7 +6,8 @@
       .video_info.col-sm-3
         %header
           %h3= @video.title
-          %span Rating: 4.5/5.0
+          %span Rating: 
+          = @video.rating
         %p= @video.description
         .actions
           = link_to 'Watch Now', @video.video_url, class: "btn btn-primary"

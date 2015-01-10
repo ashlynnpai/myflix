@@ -14,4 +14,7 @@ class Video < ActiveRecord::Base
     where("title ILIKE ?", "%#{search_term}%").order("created_at DESC")
   end
   
+  def rating
+    reviews.average(:rating).round(1) if reviews.average(:rating)
+  end  
 end
