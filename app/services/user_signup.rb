@@ -21,6 +21,7 @@ class UserSignup
       else
         @status = :failed
         @error_message = charge.error_message
+        self
       end
     else
       @status = :failed

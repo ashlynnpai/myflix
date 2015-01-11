@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     result = UserSignup.new(@user).sign_up(params[:stripeToken], params[:invitation_token])
-    if result.successful?    
+    if result.successful?   
       flash[:success] = "Thank you for registering with MyFlix. Please sign in now."
       redirect_to login_path
     else
