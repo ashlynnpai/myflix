@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.stripe.com/v1/charges
+    uri: https://api.stripe.com/v1/customers
     body:
       encoding: US-ASCII
-      string: amount=999&currency=usd&card=tok_15JByOJwPS7CsuHvDOlfliW9&description=Charge%20for%20MyFlix%20for%20user1%40example.com
+      string: card=tok_15KGCHJwPS7CsuHvERswQDdC&plan=normal&email=user1%40example.com
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -22,7 +22,7 @@ http_interactions:
         tealeaf1-154988 3.13.4 #1 SMP Mon Mar 3 09:07:22 UTC 2014 x86_64 x86_64 x86_64
         GNU/Linux"}'
       Content-Length:
-      - '119'
+      - '71'
   response:
     status:
       code: 402
@@ -31,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 09 Jan 2015 23:15:21 GMT
+      - Mon, 12 Jan 2015 21:58:06 GMT
       Content-Type:
       - application/json;charset=utf-8
       Content-Length:
-      - '162'
+      - '117'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -47,7 +47,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_CljzFQPPuNmKCopy
+      - req_nKWxlk0DeoJ6Wqnt
       Stripe-Version:
       - '2014-12-22'
     body:
@@ -57,10 +57,9 @@ http_interactions:
           "error": {
             "message": "Your card was declined.",
             "type": "card_error",
-            "code": "card_declined",
-            "charge": "ch_15JByPJwPS7CsuHvbh9vP8Rz"
+            "code": "card_declined"
           }
         }
     http_version: 
-  recorded_at: Fri, 09 Jan 2015 23:15:21 GMT
+  recorded_at: Mon, 12 Jan 2015 21:58:06 GMT
 recorded_with: VCR 2.9.3
