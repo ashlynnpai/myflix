@@ -21,6 +21,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
 gem 'stripe'
+gem 'stripe_event'
 gem 'poltergeist'
 gem 'draper'
 
@@ -37,7 +38,6 @@ group :development, :test do
   gem 'fabrication'
   gem 'faker'
   gem 'vcr'
-  gem 'webmock'
 end
 
 group :test do
@@ -47,6 +47,7 @@ group :test do
   gem 'capybara-email'
   gem 'launchy'
   gem 'selenium-webdriver'
+  gem 'webmock'
 end
 
 group :production, :staging do
