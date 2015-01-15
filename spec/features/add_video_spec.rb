@@ -30,6 +30,8 @@ feature "Add a video" do
     page.should have_content('Ferris Bueller')
     #expect(page).to have_selector("img[src='/uploads/futurama.jpg']")
     expect(page).to have_selector("a[href='http://youtu.be/uhiCFdWeQfA']")
+    visit new_admin_video_path
+    expect(page).to have_content("You do not have access to that area")
   end
 end
 
