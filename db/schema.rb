@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150113202229) do
+ActiveRecord::Schema.define(version: 20150116190356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20150113202229) do
     t.string   "token"
     t.boolean  "admin"
     t.string   "customer_token"
+    t.boolean  "active",          default: true
   end
 
   create_table "videos", force: true do |t|
