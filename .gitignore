@@ -21,3 +21,4 @@ notes.txt
 /config/application.yml
 
 dump.rdb
+seeds.rb
