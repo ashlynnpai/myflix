@@ -9,6 +9,6 @@
 Category.create(name: "TV Comedies")
 Category.create(name: "TV Dramas")
 
-User.create(email: "user1@example.com", password: "password1", name: "Happy Hippo", admin: "true")
+
 
 
