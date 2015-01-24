@@ -28,7 +28,7 @@ describe SessionsController do
       it "sets the notice" do 
         u = Fabricate(:user)
         post :create, email: u.email, password: u.password
-        expect(flash[:notice]).not_to be_blank
+        expect(flash[:success]).not_to be_blank
       end
     end
     
@@ -44,7 +44,7 @@ describe SessionsController do
         expect(response).to redirect_to login_path
       end
       it "sets the error message" do
-        expect(flash[:error]).not_to be_blank
+        expect(flash[:danger]).not_to be_blank
       end
     end
   end
@@ -61,7 +61,7 @@ describe SessionsController do
       expect(response).to redirect_to root_path
     end
     it "sets the notice" do
-      expect(flash[:notice]).not_to be_blank
+      expect(flash[:success]).not_to be_blank
     end    
   end
 end

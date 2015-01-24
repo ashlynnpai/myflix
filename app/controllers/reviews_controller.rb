@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
     review = @video.reviews.build(params.require(:review).permit(:content, :rating).merge!(user: current_user))
     
     if review.save
-      flash[:notice] = "Thank you for your review."
+      flash[:success] = "Thank you for your review."
       redirect_to @video
     else
       @reviews = @video.reviews.reload

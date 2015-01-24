@@ -8,21 +8,21 @@ class SessionsController<ApplicationController
     if user && user.authenticate(params[:password])
       if user.active?
         session[:user_id] = user.id
-        flash[:notice] = "You are now logged in."
+        flash[:success] = "You are now logged in."
         redirect_to home_path
       else
-        flash[:error] = "Your account has been suspended."
+        flash[:danger] = "Your account has been suspended."
         redirect_to login_path
       end
     else
-      flash[:error] = "There's something wrong with your username or password."
+      flash[:danger] = "There's something wrong with your username or password."
       redirect_to login_path
     end
   end
   
   def destroy
     session[:user_id] = nil
-    flash[:notice] = "You are now logged out."
+    flash[:success] = "You are now logged out."
     redirect_to root_path
   end
 end
