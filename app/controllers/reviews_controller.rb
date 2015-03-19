@@ -12,6 +12,5 @@ class ReviewsController < ApplicationController
       @reviews = @video.reviews.reload
       render 'videos/show'
     end
-  end
-  
+  end  
 end
