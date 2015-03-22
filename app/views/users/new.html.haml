@@ -7,15 +7,15 @@
   .row
     .col-sm-10.col-sm-offset-1
       .form-horizontal
-        = bootstrap_form_for @user, html: {class: "form-horizontal", id: "payment-form"} do |f|
+        = bootstrap_form_for(@user, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-6", html: {id: "payment-form"}) do |f|
           %header
             %h1 Register
           %fieldset
-            .col-sm-6
-              = f.text_field :email, label: "Email"
-              = f.password_field :password, label: "Password"
-              = f.text_field :name , label: "Full Name"
-              = hidden_field_tag :invitation_token, @invitation_token
+            = f.email_field :email, label: "Email Address"
+            = f.password_field :password
+            = f.password_field :password_confirmation, label: "Confirm Password" 
+            = f.text_field :name, label: "Full Name"
+            = hidden_field_tag :invitation_token, @invitation_token
           %fieldset.credit_card
             .payment-errors
             .form-group
