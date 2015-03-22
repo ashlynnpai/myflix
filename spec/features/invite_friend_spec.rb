@@ -9,10 +9,14 @@ feature 'Invite a Friend' do
     send_invitation
     
     friend_accepts_invitation
+    
+    expect(page).to have_content 'Sign in '
+    expect(page).to have_content 'Email'
 
-    fill_in "Email Address", with: "friend@example.com"
-    fill_in "Password", with: "password1"
+    fill_in 'Email', :with => 'friend@example.com'
+    fill_in 'Password', :with => 'password1'
     click_button "Sign in"
+    expect(page).to have_content 'Friendly Fran'
     
     click_link "People"
     expect(page).to have_content user.name
@@ -37,6 +41,7 @@ feature 'Invite a Friend' do
   def friend_accepts_invitation
     open_email('friend@example.com')
     current_email.click_link 'Accept Invitation'
+    fill_in "Email", :with => 'friend@example.com'
     fill_in "Password", :with => 'password1'
     fill_in "Confirm Password", :with => 'password1'
     fill_in "Full Name", :with => 'Friendly Fran'

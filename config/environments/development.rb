@@ -17,7 +17,7 @@ Myflix::Application.configure do
   address: 'mailtrap.io',
   port: '2525',
   domain: 'mailtrap.io',
-  authentication: 'plain'
+  :authentication => :cram_md5
 }
 
   # Print deprecation notices to the Rails logger
